@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoker Trainer - Dota 2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+
+        <header class="game-header">
+            <div class="logo">
+                <h1>INVOKER TRAINER</h1>
+                <p class="subtitle">Master the Arsenal Magus</p>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Combo</span>
+                    <span class="stat-value" id="combo">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Time</span>
+                    <span class="stat-value" id="timer">--:--</span>
+                </div>
+            </div>
+        </header>
+
+
+        <div class="mode-selection" id="modeSelection">
+            <h2 class="mode-title">Select Training Mode</h2>
+            <div class="mode-buttons">
+                <button class="mode-btn" data-mode="practice">
+                    <div class="mode-icon">🎯</div>
+                    <h3>Practice Mode</h3>
+                    <p>Learn spells at your own pace</p>
+                </button>
+                <button class="mode-btn" data-mode="timed">
+                    <div class="mode-icon">⏱️</div>
+                    <h3>Timed Mode</h3>
+                    <p>Race against the clock</p>
+                </button>
+                <button class="mode-btn" data-mode="combo">
+                    <div class="mode-icon">⚡</div>
+                    <h3>Combo Mode</h3>
+                    <p>Execute spell combinations</p>
+                </button>
+            </div>
+        </div>
+
+
+        <div class="game-area hidden" id="gameArea">
+            <div class="challenge-display" id="challengeDisplay">
+                <h3>Create This Spell:</h3>
+                <div class="target-spell" id="targetSpell"></div>
+                <div class="target-spell-image" id="targetSpellImage"></div>
+                <div class="spell-combo" id="spellCombo"></div>
+            </div>
+
+
+            <div class="main-hud">
+
+
+                <div class="center-controls">
+
+                    <div class="orb-display">
+                        <div class="orb-slot" id="orb1">
+                            <img class="orb-image" alt="">
+                        </div>
+                        <div class="orb-slot" id="orb2">
+                            <img class="orb-image" alt="">
+                        </div>
+                        <div class="orb-slot" id="orb3">
+                            <img class="orb-image" alt="">
+                        </div>
+                    </div>
+
+
+                    <div class="orb-controls">
+                        <button class="orb-btn quas" data-orb="quas">
+                            <img src="images/quas.png" alt="Quas" class="orb-btn-image">
+                            <span class="orb-key">Q</span>
+                            <span class="orb-name">Quas</span>
+                        </button>
+                        <button class="orb-btn wex" data-orb="wex">
+                            <img src="images/wex.png" alt="Wex" class="orb-btn-image">
+                            <span class="orb-key">W</span>
+                            <span class="orb-name">Wex</span>
+                        </button>
+                        <button class="orb-btn exort" data-orb="exort">
+                            <img src="images/exort.png" alt="Exort" class="orb-btn-image">
+                            <span class="orb-key">E</span>
+                            <span class="orb-name">Exort</span>
+                        </button>
+                    </div>
+
+
+                    <div class="spell-slots">
+                        <div class="spell-slot" id="spell1">
+                            <span class="spell-key">D</span>
+                            <div class="spell-icon"></div>
+                            <div class="spell-name"></div>
+                        </div>
+                        <div class="spell-slot" id="spell2">
+                            <span class="spell-key">F</span>
+                            <div class="spell-icon"></div>
+                            <div class="spell-name"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="invoke-container">
+                    <button class="invoke-btn" id="invokeBtn">
+                        <span class="orb-key">R</span>
+                        <span class="orb-name">Invoke</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="spell-reference">
+                <h3>Spell Reference</h3>
+                <div class="spell-grid" id="spellGrid"></div>
+            </div>
+
+
+            <div class="controls-info">
+                <h4>Keyboard Controls</h4>
+                <div class="control-list">
+                    <span><kbd>Q</kbd> Quas</span>
+                    <span><kbd>W</kbd> Wex</span>
+                    <span><kbd>E</kbd> Exort</span>
+                    <span><kbd>R</kbd> Invoke</span>
+                    <span><kbd>D</kbd> Spell 1</span>
+                    <span><kbd>F</kbd> Spell 2</span>
+                    <span><kbd>ESC</kbd> Menu</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal hidden" id="resultModal">
+            <div class="modal-content">
+                <h2 id="resultTitle">Great Job!</h2>
+                <div class="result-stats">
+                    <div class="result-item">
+                        <span class="result-label">Final Score</span>
+                        <span class="result-value" id="finalScore">0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Best Combo</span>
+                        <span class="result-value" id="bestCombo">0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Time</span>
+                        <span class="result-value" id="finalTime">00:00</span>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn-primary" id="playAgainBtn">Play Again</button>
+                    <button class="btn-secondary" id="menuBtn">Main Menu</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="particles" id="particles"></div>
+    </div>
+
+
+    <audio id="quasSound" src="sounds/quas.mp3" preload="auto"></audio>
+    <audio id="wexSound" src="sounds/wex.mp3" preload="auto"></audio>
+    <audio id="exortSound" src="sounds/exort.mp3" preload="auto"></audio>
+    <audio id="invokeSound" src="sounds/Invoke.mp3" preload="auto"></audio>
+    <audio id="successSound" src="sounds/successSound.mp3" preload="auto"></audio>
+    <audio id="errorSound" src="sounds/errorSound.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
